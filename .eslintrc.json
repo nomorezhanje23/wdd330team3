@@ -1,13 +1,13 @@
 {
-  "plugins": ["import"],
   "extends": ["eslint:recommended", "plugin:import/errors", "prettier"],
+  "plugins": ["import"],
   "env": {
     "es6": true,
     "browser": true,
     "node": true
   },
   "parserOptions": {
-    "ecmaVersion": 2020,
+    "ecmaVersion": 2017,
     "sourceType": "module"
   },
   "rules": {
@@ -25,7 +25,7 @@
       }
     ],
     "no-console": 1,
-    "quotes": ["error", "double", { "allowTemplateLiterals": true }],
+    "quotes":["error", "single"],
     "func-names": 0,
     "space-unary-ops": 2,
     "space-in-parens": "error",
@@ -42,7 +42,6 @@
         "hoist": "all",
         "allow": ["resolve", "reject", "done", "next", "err", "error"]
       }
-    ],
-    "no-unused-expressions": "off"
+    ]
   }
 }

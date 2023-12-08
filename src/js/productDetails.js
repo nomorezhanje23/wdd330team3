@@ -1,4 +1,5 @@
-import { setLocalStorage, getLocalStorage, loadHeaderFooter } from "./utils.js";
+import { setLocalStorage, getLocalStorage, loadHeaderFooter, alertMessage } from './utils.js';
+
 
 loadHeaderFooter();
 export default class ProductDetails {
@@ -9,22 +10,23 @@ export default class ProductDetails {
   }
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
-    document.querySelector("main").innerHTML = this.renderProductDetails();
+    document.querySelector('main').innerHTML = this.renderProductDetails();
     // add listener to Add to Cart button
     document
-      .getElementById("addToCart")
-      .addEventListener("click", this.addToCart.bind(this));
+      .getElementById('addToCart')
+      .addEventListener('click', this.addToCart.bind(this));
   }
   addToCart() {
     // to fix the cart we need to get anything that is in the cart already.
-    let cartContents = getLocalStorage("so-cart");
+    let cartContents = getLocalStorage('so-cart');
     //check to see if there was anything there
     if (!cartContents) {
       cartContents = [];
     }
     // then add the current product to the list
     cartContents.push(this.product);
-    setLocalStorage("so-cart", cartContents);
+    setLocalStorage('so-cart', cartContents);
+    alertMessage(`${this.product.NameWithoutBrand} added to cart!`)
   }
   renderProductDetails() {
     return `<section class="product-detail"> <h3>${this.product.Brand.Name}</h3>

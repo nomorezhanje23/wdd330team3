@@ -9,8 +9,10 @@ export default class CartList {
 
   async init() {
     const list = getLocalStorage(this.key);
-    this.calculateListTotal(list);
-    this.renderList(list);
+    if(list) {
+      this.calculateListTotal(list);
+      this.renderList(list);
+    }
   }
 
   prepareTemplate(template, product) {
@@ -25,8 +27,8 @@ export default class CartList {
     return template;
   }
   calculateListTotal(list) {
-    const amounts = list.map((item) => item.FinalPrice);
-    this.total = amounts.reduce((sum, item) => sum + item);
+      const amounts = list.map((item) => item.FinalPrice);
+      this.total = amounts.reduce((sum, item) => sum + item, 0);
   }
   renderList(list) {
     // make sure the list is empty
